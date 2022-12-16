@@ -47,6 +47,48 @@ export default function App() {
     },
   ];
 
+  const [defaultRating, setdefaultRating] = useState(0);
+  const [maxRating, setmaxRating] = useState([1, 2, 3, 4, 5]);
+  const startFilled =
+    'https://raw.githubusercontent.com/ihak/star-rating-react-native/master/StarRating/star-filled.png';
+  const startUnfilled =
+    'https://raw.githubusercontent.com/ihak/star-rating-react-native/master/StarRating/star-unfilled.png';
+
+  const RatingBar = () => {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.ratingBar}>
+          {maxRating.map((item, key) => {
+            {
+              /*her bir yıldız icin */
+            }
+            return (
+              <TouchableOpacity
+                activeOpacity={0.7}
+                key={item}
+                onPress={() => setdefaultRating(item)}>
+                <Image
+                  style={styles.img}
+                  source={
+                    item <= defaultRating
+                      ? {uri: startFilled}
+                      : {uri: startUnfilled}
+                  }></Image>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.button}
+          onPress={() => console.log(defaultRating)}>
+          <Text style={styles.textStyle}>Press the button to get selected value</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    );
+  };
+
   const Item1 = ({ title }) => (
   <TouchableWithoutFeedback>
     <TouchableOpacity activeOpacity={0.4} onPress={() => setPressed(!isPressed)}>
